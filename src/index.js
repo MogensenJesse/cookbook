@@ -14,7 +14,7 @@ root.render(
         <Route path="/" element={<App />}>
           {" "}
           <Route path="/overview" element={<Overview />} />
-          <Route path="/recipe" element={<Recipe />} />
+          <Route path="/overview/:recipe" element={<Recipe />} />
         </Route>
 
         <Route

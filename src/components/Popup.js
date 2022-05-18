@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { db } from "../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
 
-const Popup = () => {
+const Popup = (props) => {
   const [form, setForm] = useState({
     name: "",
     desc: "",
@@ -12,15 +12,12 @@ const Popup = () => {
     score: "",
   });
 
-  // popup pas weergeven onclick
-  const [popupActive, setPopupActive] = useState(false);
-
-  setPopupActive(false);
-
   const recipesCollectionRef = collection(db, "recipes");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(form);
 
     if (!form.name || !form.desc || !form.ingredients || !form.steps) {
       alert("Please fill in all fields");
@@ -36,6 +33,8 @@ const Popup = () => {
       allergens: [],
       score: "",
     });
+
+    props.setTrigger(false);
   };
 
   const handleIngredient = (e, i) => {
@@ -68,87 +67,89 @@ const Popup = () => {
     setForm({ ...form, steps: [...form.steps, ""] });
   };
 
-  return (
+  return props.trigger ? (
     <div>
-      {popupActive && (
-        <div className="popup">
-          <div className="innerPopup">
-            <h2>Add a recipe</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>Name</label>
+      <div className="popup">
+        <div className="innerPopup">
+          <h2>Add a recipe</h2>
+          <form>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Description</label>
+              <textarea
+                type="text"
+                value={form.desc}
+                onChange={(e) => setForm({ ...form, desc: e.target.value })}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Ingredients</label>
+              {form.ingredients.map((ingredient, i) => (
                 <input
+                  key={i}
                   type="text"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  value={ingredient}
+                  onChange={(e) => handleIngredient(e, i)}
                 />
-              </div>
+              ))}
+            </div>
+            <button type="button" onClick={handleIngredientCount}>
+              Add ingredient
+            </button>
 
-              <div className="form-group">
-                <label>Description</label>
-                <textarea
+            <div className="form-group">
+              <label>Steps</label>
+              {form.steps.map((step, i) => (
+                <textarea key={i} type="text" value={step} onChange={(e) => handleStep(e, i)} />
+              ))}
+            </div>
+            <button type="button" onClick={handleStepCount}>
+              Add step
+            </button>
+
+            <div className="form-group">
+              <label>
+                Allergens <span className="optional-label">Optional</span>
+              </label>
+              {form.allergens.map((allergen, i) => (
+                <input
+                  key={i}
                   type="text"
-                  value={form.desc}
-                  onChange={(e) => setForm({ ...form, desc: e.target.value })}
+                  value={allergen}
+                  onChange={(e) => handleAllergen(e, i)}
                 />
-              </div>
+              ))}
+            </div>
+            <button type="button" onClick={handleAllergenCount}>
+              Add Allergen
+            </button>
 
-              <div className="form-group">
-                <label>Ingredients</label>
-                {form.ingredients.map((ingredient, i) => (
-                  <input
-                    key={i}
-                    type="text"
-                    value={ingredient}
-                    onChange={(e) => handleIngredient(e, i)}
-                  />
-                ))}
-              </div>
-              <button type="button" onClick={handleIngredientCount}>
-                Add ingredient
+            <div className="submitButtons">
+              <button type="submit" onClick={handleSubmit}>
+                Add recipe
               </button>
-
-              <div className="form-group">
-                <label>Steps</label>
-                {form.steps.map((step, i) => (
-                  <textarea key={i} type="text" value={step} onChange={(e) => handleStep(e, i)} />
-                ))}
-              </div>
-              <button type="button" onClick={handleStepCount}>
-                Add step
+              <button type="button" onClick={() => props.setTrigger(false)}>
+                Close
               </button>
+            </div>
+          </form>
 
-              <div className="form-group">
-                <label>
-                  Allergens <span className="optional-label">Optional</span>
-                </label>
-                {form.allergens.map((allergen, i) => (
-                  <input
-                    key={i}
-                    type="text"
-                    value={allergen}
-                    onChange={(e) => handleAllergen(e, i)}
-                  />
-                ))}
-              </div>
-              <button type="button" onClick={handleAllergenCount}>
-                Add Allergen
-              </button>
-
-              <div className="submitButtons">
-                <button type="submit">Add recipe</button>
-                <button type="button" onClick={() => setPopupActive(false)}>
-                  Close
-                </button>
-              </div>
-            </form>
-
-            {/* Test om te zien of de inputs werken */}
-            {/* {JSON.stringify(form)} */}
-          </div>
+          {/* Test om te zien of de inputs werken */}
+          {/* {JSON.stringify(form)} */}
         </div>
-      )}
+      </div>
     </div>
+  ) : (
+    ""
   );
 };
 
