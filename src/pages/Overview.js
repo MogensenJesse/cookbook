@@ -3,7 +3,7 @@ import { db } from "../firebase/config";
 import { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import Popup from "../components/Popup";
+import { Popup } from "../components/Popup";
 import "../assets/css/reset.css";
 import "../assets/css/overview.css";
 
@@ -40,11 +40,8 @@ function Overview() {
             {recipes.map((recipe, i) => {
               return (
                 <div key={recipe.id} className="recipeBox">
+                  <Link to={`/overview/${recipe.id}`}>View recipe</Link>
 
-                  <Link to={`/overview/${recipe.id}`}>
-                    View recipe
-                  </Link>
-                  
                   <h2>{recipe.name}</h2>
 
                   <span>{recipe.score}</span>
@@ -80,3 +77,42 @@ function Overview() {
 }
 
 export default Overview;
+
+// Code om filters aan te roepen, opkuisen wel. Zie Filter.js & useCollection.js
+
+// import React, { useState } from "react";
+// import useCollection from "../hooks/useCollection";
+// import BigCard from "../components/BigCard";
+// import "../styles/Overview.css";
+// import { Row, Col } from "react-bootstrap";
+// import { Filter } from "../components/Filter";
+
+// function Overview() {
+//   const [filters, setFilters] = useState({});
+//   const recipes = useCollection("recipe", filters);
+
+//   console.log(recipes);
+//   return (
+//     <main className="overview">
+//       {/* <div className="overview__container"> */}
+
+//       <Row>
+//         <Col xs={3}>
+//           <Filter setFilters={setFilters} selectedFilters={filters} />
+//         </Col>
+//         <Col>
+//           <h2 className="overview__title">Overview</h2>
+//           <section className="overview__items">
+//             {recipes.map((recipe, i) => (
+//               <BigCard recipe={recipe} key={recipe.id} />
+//             ))}
+//           </section>
+//         </Col>
+//       </Row>
+
+//       {/* </div> */}
+//     </main>
+//   );
+// }
+
+// export default Overview;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { db } from "../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import { useParams, Link } from "react-router-dom";
+import { doc, collection, addDoc, deleteDoc } from "firebase/firestore";
 
 const Popup = (props) => {
   const [form, setForm] = useState({
@@ -155,4 +156,29 @@ const Popup = (props) => {
   );
 };
 
-export default Popup;
+const ConfirmDialog = (props) => {
+  const [recipe, setRecipe] = useState([]);
+
+  const { recipeid } = useParams();
+  const removeRecipe = () => {
+    deleteDoc(doc(db, "recipes", recipeid));
+  };
+  return props.trigger ? (
+    <div>
+      <div className="popup">
+        {/* popupBackground dient om makkelijk weg te klikken */}
+        <div className="popupBackground" onClick={() => props.setTrigger(false)}></div>
+        <div className="innerPopup">
+          <h2>Are you sure?</h2>
+          <button onClick={() => removeRecipe(recipe.id)}>
+            <Link to="/overview">Yes, remove this recipe</Link>
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+};
+
+export { Popup, ConfirmDialog };
