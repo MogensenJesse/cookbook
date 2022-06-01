@@ -1,7 +1,7 @@
 import React from "react";
 import { db } from "../firebase/config";
 import { useState, useEffect } from "react";
-import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Popup from "../components/Popup";
 import "../assets/css/reset.css";
@@ -28,10 +28,6 @@ function Overview() {
     });
   }, []);
 
-  const removeRecipe = (id) => {
-    deleteDoc(doc(db, "recipes", id));
-  };
-
   return (
     <div>
       <main className="mainContainer">
@@ -45,7 +41,7 @@ function Overview() {
               return (
                 <div key={recipe.id} className="recipeBox">
 
-                  <Link to={`/overview/${recipe.name}`}>
+                  <Link to={`/overview/${recipe.id}`}>
                     View recipe
                   </Link>
                   
@@ -72,7 +68,6 @@ function Overview() {
                       })}
                     </ol>
                   </div>
-                  <button onClick={() => removeRecipe(recipe.id)}>Remove</button>
                 </div>
               );
             })}

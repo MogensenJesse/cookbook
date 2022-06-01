@@ -70,6 +70,8 @@ const Popup = (props) => {
   return props.trigger ? (
     <div>
       <div className="popup">
+        {/* popupBackground dient om makkelijk weg te klikken */}
+        <div className="popupBackground" onClick={() => props.setTrigger(false)}></div>
         <div className="innerPopup">
           <h2>Add a recipe</h2>
           <form>

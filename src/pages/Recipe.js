@@ -1,62 +1,52 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { db } from "../firebase/config";
-import { collection, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState([]);
 
-  // nu nog uit het juiste document trekken
-  const recipesCollectionRef = collection(db, "recipes");
+  const { recipeid } = useParams();
+
+  // console.log(recipeid);
 
   useEffect(() => {
-    onSnapshot(recipesCollectionRef, (snapshot) => {
-      setRecipe(
-        snapshot.docs.map((doc) => {
-          console.log(doc.data());
-          return {
-            id: doc.id,
-            viewing: false,
-            ...doc.data(),
-          };
-        })
-      );
+    const docRef = doc(db, `recipes`, recipeid);
+
+    onSnapshot(docRef, (snapshot) => {
+      console.log(snapshot.data());
+      setRecipe(snapshot.data());
     });
   }, []);
 
+  const removeRecipe = (id) => {
+    deleteDoc(doc(db, "recipes", recipeid));
+  };
+
+// To do: deletebutton werkt niet
+
   return (
     <div>
-      {recipe.map((data, i) => {
-              return (
-                <div key={data.id} className="recipeBox">
-                  
-                  <h2>{data.name}</h2>
+      <h1>{recipe.name}</h1>
+      <p dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
+      <span>Score: {recipe.score}</span>
+      <div>
+        <h4>Ingredients</h4>
+        <ul>
+          {recipe.ingredients?.map((ingredient, i) => {
+            return <li key={i}>{ingredient}</li>;
+          })}
+        </ul>
 
-                  <span>{data.score}</span>
-
-                  {/* dangerouslySetInnerHTML neemt de break tags vanuit de database over */}
-                  <p dangerouslySetInnerHTML={{ __html: data.desc }}></p>
-                  {/* <p>{recipe.desc}</p> */}
-
-                  <div>
-                    <h4>Ingredients</h4>
-                    <ul>
-                      {data.ingredients.map((ingredient, i) => {
-                        return <li key={i}>{ingredient}</li>;
-                      })}
-                    </ul>
-
-                    <h4>Steps</h4>
-                    <ol>
-                      {data.steps.map((step, i) => {
-                        return <li key={i}>{step}</li>;
-                      })}
-                    </ol>
-                  </div>
-                  {/* <button onClick={() => removeRecipe(data.id)}>Remove</button> */}
-                </div>
-              );
-            })}
+        <h4>Steps</h4>
+        <ol>
+          {recipe.steps?.map((step, i) => {
+            return <li key={i}>{step}</li>;
+          })}
+        </ol>
+        <button onClick={() => removeRecipe(recipe.id)}>Remove recipe</button>
+      </div>
     </div>
   );
 };
