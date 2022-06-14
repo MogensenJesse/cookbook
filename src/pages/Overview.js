@@ -40,30 +40,33 @@ function Overview() {
             {recipes.map((recipe, i) => {
               return (
                 <div key={recipe.id} className="recipeBox">
-                  <Link to={`/overview/${recipe.id}`}>View recipe</Link>
+                  <img className="recipe-image-card" src={recipe.image}></img>
+                  <div className="contentContainer">
+                    <Link to={`/overview/${recipe.id}`}>View recipe</Link>
 
-                  <h2>{recipe.name}</h2>
+                    <h2>{recipe.name}</h2>
 
-                  <span>{recipe.score}</span>
+                    <span>{recipe.score}</span>
 
-                  {/* dangerouslySetInnerHTML neemt de break tags vanuit de database over */}
-                  <p dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
-                  {/* <p>{recipe.desc}</p> */}
+                    {/* dangerouslySetInnerHTML neemt de break tags vanuit de database over */}
+                    <p dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
+                    {/* <p>{recipe.desc}</p> */}
 
-                  <div>
-                    <h4>Ingredients</h4>
-                    <ul>
-                      {recipe.ingredients.map((ingredient, i) => {
-                        return <li key={i}>{ingredient}</li>;
-                      })}
-                    </ul>
+                    <div>
+                      <h4>Ingredients</h4>
+                      <ul>
+                        {recipe.ingredients.map((ingredient, i) => {
+                          return <li key={i}>{ingredient}</li>;
+                        })}
+                      </ul>
 
-                    <h4>Steps</h4>
-                    <ol>
-                      {recipe.steps.map((step, i) => {
-                        return <li key={i}>{step}</li>;
-                      })}
-                    </ol>
+                      <h4>Steps</h4>
+                      <ol>
+                        {recipe.steps.map((step, i) => {
+                          return <li key={i}>{step}</li>;
+                        })}
+                      </ol>
+                    </div>
                   </div>
                 </div>
               );
