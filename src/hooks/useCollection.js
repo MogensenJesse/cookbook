@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../utils/database";
+import { db } from "../firebase/config";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 // const useCollection = (c) => {
@@ -60,7 +60,7 @@ const useCollection = (c, filterObject = {}) => {
 
     return () => unsub();
   }, [c, JSON.stringify(filterObject)]);
-  console.log(data);
+  // console.log(data);
 
   if (!data) return null;
   return data;

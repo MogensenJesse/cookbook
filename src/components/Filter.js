@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Form, Container } from "react-bootstrap";
+// import { Form, Container } from "react-bootstrap";
 
 export const Filter = ({ setFilters, selectedFilters }) => {
   const onChange = (e) => {
     /**
      * {
-     * cuisineType:["Mediterraans"]
+     * mealType:["Mediterraans"]
      * }
      */
     const selectedName = e.target.name;
@@ -36,40 +36,61 @@ export const Filter = ({ setFilters, selectedFilters }) => {
     }
   };
 
-  console.log(selectedFilters);
+  // console.log(selectedFilters);
 
   return (
-    <Container>
+    <div>
       <h3>Zin in</h3>
-      <Form>
+      <form>
         {["checkbox"].map((type) => (
-          <Form.Group key={`default-${type}`} className="mb-3">
-            <Form.Label>Keuken</Form.Label>
-            <Form.Check
+          <div key={`default-${type}`}>
+            <input
               type={type}
-              id={`default-${type}-Belgisch-Frans`}
-              label="Belgisch-Frans"
-              value="BelgischFrans"
-              name="cuisineType"
-              checked={selectedFilters.cuisineType?.includes("BelgischFrans")}
+              id={`default-${type}-Breakfast`}
+              label="Breakfast"
+              value="Breakfast"
+              name="mealType"
+              checked={selectedFilters.mealType?.includes("Breakfast")}
               onChange={onChange}
             />
-            <Form.Check
+            <label for={`default-${type}-Breakfast`}>Breakfast</label>
+            <input
               type={type}
-              id={`default-${type}-Tex-Mex`}
-              label="Tex-Mex"
-              value="TexMex"
-              name="cuisineType"
-              checked={selectedFilters.cuisineType?.includes("TexMex")}
+              id={`default-${type}-Lunch`}
+              label="Lunch"
+              value="Lunch"
+              name="mealType"
+              checked={selectedFilters.mealType?.includes("Lunch")}
               onChange={onChange}
             />
+            <label for={`default-${type}-Lunch`}>Lunch</label>
+            <input
+              type={type}
+              id={`default-${type}-Snack`}
+              label="Snack"
+              value="Snack"
+              name="mealType"
+              checked={selectedFilters.mealType?.includes("Snack")}
+              onChange={onChange}
+            />
+            <label for={`default-${type}-Snack`}>Snacks</label>
+            <input
+              type={type}
+              id={`default-${type}-Dinner`}
+              label="Dinner"
+              value="Dinner"
+              name="mealType"
+              checked={selectedFilters.mealType?.includes("Dinner")}
+              onChange={onChange}
+            />
+            <label for={`default-${type}-Dinner`}>Dinner</label>
             {/* <Form.Check
               type={type}
               id={`default-${type}-Mediterraans`}
               label="Mediterraans"
               value="Mediterraans"
-              name="cuisineType"
-              checked={cuisineType.Mediterraans}
+              name="mealType"
+              checked={mealType.Mediterraans}
               onChange={onChange}
             />
             <Form.Check
@@ -77,8 +98,8 @@ export const Filter = ({ setFilters, selectedFilters }) => {
               id={`default-${type}-Oosters`}
               label="Oosters"
               value="Oosters"
-              name="cuisineType"
-              checked={cuisineType.Oosters}
+              name="mealType"
+              checked={mealType.Oosters}
               onChange={onChange}
             />
           </Form.Group> */}
@@ -155,9 +176,9 @@ export const Filter = ({ setFilters, selectedFilters }) => {
               checked={cookingTime.Min60}
               onChange={onChange}
             /> */}
-          </Form.Group>
+          </div>
         ))}
-      </Form>
-    </Container>
+      </form>
+    </div>
   );
 };

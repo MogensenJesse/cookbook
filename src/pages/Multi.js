@@ -1,85 +1,71 @@
-import React, { useState } from "react";
-import { render } from "react-dom";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { storage } from "../firebase/config";
+import React, { useState, useEffect } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase/config";
 
-const Multi = () => {
-  const [images, setImages] = useState([]);
-  const [urls, setUrls] = useState([]);
-  const [progress, setProgress] = useState(0);
+// import "./App.css";
 
-  const handleChange = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newImage = e.target.files[i];
-      newImage["id"] = Math.random();
-      setImages((prevState) => [...prevState, newImage]);
-    }
-  };
+function App() {
+  const [recipes, setRecipes] = useState([]);
 
-  const handleUpload = () => {
-    const promises = [];
-    images.map((image) => {
-      const storageRef = ref(storage, `/nog/${image.name}`);
+  const recipesCollectionRef = collection(db, "recipes");
 
-      const uploadTask = uploadBytesResumable(storageRef, image);
-      promises.push(uploadTask);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setProgress(progress);
-        },
-        (error) => {
-          console.log(error);
-        },
-        async () => {
-          await storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then((urls) => {
-              setUrls((prevState) => [...prevState, urls]);
-            });
-        }
+  useEffect(() => {
+    onSnapshot(recipesCollectionRef, (snapshot) => {
+      setRecipes(
+        snapshot.docs.map((doc) => {
+          // console.log(doc.data());
+          return {
+            id: doc.id,
+            viewing: false,
+            ...doc.data(),
+          };
+        })
       );
     });
+  }, []);
 
-    Promise.all(promises)
-      .then(() => alert("All images uploaded"))
-      .catch((err) => console.log(err));
-  };
+  const fruit = recipes.map((recipe, i) => recipe.name);
 
-  console.log("images: ", images);
-  console.log("urls", urls);
+  const [filter, setFilter] = useState("");
 
   return (
-    <div>
-      <progress value={progress} max="100" />
-      <br />
-      <br />
-      <input type="file" onChange={handleChange} />
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload</button>
-      <br />
-      {urls.map((url, i) => (
-        <div key={i}>
-          <a href={url} target="_blank">
-            {url}
-          </a>
-        </div>
-      ))}
-      <br />
-      {urls.map((url, i) => (
-        <img
-          key={i}
-          style={{ width: "500px" }}
-          src={url || "http://via.placeholder.com/300"}
-          alt="firebase-image"
+    <div className="App">
+      <p>
+        Type to filter the list:
+        <input
+          id="filter"
+          name="filter"
+          type="text"
+          value={filter}
+          onChange={(event) => setFilter(event.target.value)}
         />
-      ))}
+      </p>
+      <div>
+      <ul>
+          {recipes.name?.map((ingredient, i) => {
+            return <li key={i}>{ingredient}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
-};
+}
 
-export default Multi;
+export default App;
+
+
+// {fruit
+//   .filter((recipe) => recipe.includes(filter) || filter === "")
+//   .map((recipe) => (
+//     // <li key={f}>{f}</li>
+//     <div recipe={recipe} key={recipe.id} className="recipeBox">
+//       <img className="recipe-image-card" src={recipe.image} alt={recipe.name}></img>
+//       <div className="contentContainer">
+//         {/* <Link to={`/overview/${recipe.id}`}>View recipe</Link> */}
+
+//         <h2>{recipe}</h2>
+
+        
+//       </div>
+//     </div>
+//   ))}
