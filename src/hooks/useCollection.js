@@ -2,34 +2,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase/config";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
-// const useCollection = (c) => {
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     let ref = collection(db, c);
-//     const unsub = onSnapshot(ref, (snapshot) => {
-//       let results = [];
-//       snapshot.docs.forEach((doc) => {
-//         results.push({ ...doc.data(), id: doc.id });
-//       });
-//       setData(results);
-//     });
-//     return () => unsub();
-//   }, [c]);
-//   console.log(data);
-
-//   if (!data) return null;
-//   return data;
-// };
-
 const useCollection = (c, filterObject = {}) => {
   const [data, setData] = useState([]);
-
-  /**
-   * {filterObject
-   * cuisineType:["Mediterraans"]
-   * }
-   */
 
   useEffect(() => {
     let unsub;

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { Popup } from "../components/Popup";
+import { Rating } from "react-simple-star-rating";
 
 import useCollection from "../hooks/useCollection";
 import { Filter } from "../components/Filter";
@@ -13,9 +14,15 @@ import "../assets/css/overview.css";
 function Overview() {
   // const [recipes, setRecipes] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
+  const [rating, setRating] = useState(0);
 
   const [filters, setFilters] = useState({});
   const recipes = useCollection("recipes", filters);
+
+  const handleRating = (rate: number) => {
+    setRating(rate);
+    // other logic
+  };
 
   // console.log(recipes);
 
@@ -54,33 +61,17 @@ function Overview() {
           <div className="recipesContainer">
             {recipes.map((recipe, i) => (
               <div recipe={recipe} key={recipe.id} className="recipeBox">
+                <Link to={`/overview/${recipe.id}`} className="cardLink"></Link>
                 <img className="recipe-image-card" src={recipe.image} alt={recipe.name}></img>
+                <span>{recipe.mealType}</span>
                 <div className="contentContainer">
-                  <Link to={`/overview/${recipe.id}`}>View recipe</Link>
-
                   <h2>{recipe.name}</h2>
-
-                  <span>{recipe.score}</span>
-
-                  {/* dangerouslySetInnerHTML neemt de break tags vanuit de database over */}
-                  <p dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
-                  {/* <p>{recipe.desc}</p> */}
-
-                  <div>
-                    <h4>Ingredients</h4>
-                    <ul>
-                      {recipe.ingredients.map((ingredient, i) => {
-                        return <li key={i}>{ingredient}</li>;
-                      })}
-                    </ul>
-
-                    <h4>Steps</h4>
-                    <ol>
-                      {recipe.steps.map((step, i) => {
-                        return <li key={i}>{step}</li>;
-                      })}
-                    </ol>
-                  </div>
+                  <Rating
+                    ratingValue={recipe.score}
+                    fillColorArray={["#f17a45", "#f19745", "#f1a545", "#f1b345", "#f1d045"]}
+                    readonly={true}
+                    // allowHalfIcon
+                  />
                 </div>
               </div>
             ))}

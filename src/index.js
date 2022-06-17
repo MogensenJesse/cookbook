@@ -4,7 +4,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import Overview from "./pages/Overview";
 import Recipe from "./pages/Recipe";
-import Multi from "./pages/Multi";
+import ShoppingList from "./pages/ShoppingList";
+// import Test from "./pages/Test";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -15,8 +16,9 @@ root.render(
         <Route path="/" element={<App />}>
           {" "}
           <Route path="/overview" element={<Overview />} />
-          <Route path="/multi" element={<Multi />} />
           <Route path="/overview/:recipeid" element={<Recipe />} />
+          <Route path="/shopping-list" element={<ShoppingList />} />
+          {/* <Route path="/test" element={<Test />} /> */}
         </Route>
 
         <Route

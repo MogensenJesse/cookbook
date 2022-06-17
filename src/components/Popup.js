@@ -18,6 +18,7 @@ const Popup = (props) => {
   });
 
   const recipesCollectionRef = collection(db, "recipes");
+  // const ingredientCollectionRef = doc(db, "recipes", "ingredients");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,17 +93,8 @@ const Popup = (props) => {
               />
             </div>
 
-            {/* <div className="form-group">
-              <label>Food type</label>
-              <input
-                type="text"
-                value={form.mealType}
-                onChange={(e) => setForm({ ...form, mealType: e.target.value })}
-              />
-            </div> */}
-
             <div className="form-group">
-              <label>Food type</label>
+              <label>This recipe is...</label>
               <select
                 value={form.mealType}
                 onChange={(e) => setForm({ ...form, mealType: e.target.value })}

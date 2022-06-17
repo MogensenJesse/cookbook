@@ -18,6 +18,7 @@ specifiers:
   react-hook-form: ^7.31.1
   react-router-dom: ^6.3.0
   react-scripts: 5.0.1
+  react-simple-star-rating: ^4.0.5
   svgo: 2.8.0
   typescript: '*'
   web-vitals: ^2.1.4
@@ -39,6 +40,7 @@ dependencies:
   react-hook-form: 7.31.1_react@18.1.0
   react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   react-scripts: 5.0.1_yo44apyfppz34s3hgzapanbtsa
+  react-simple-star-rating: 4.0.5_ef5jwxihqo6n7gxfmzogljlgcm
   svgo: 2.8.0
   typescript: 4.6.4
   web-vitals: 2.1.4
@@ -8730,6 +8732,17 @@ packages:
       - webpack-cli
       - webpack-hot-middleware
       - webpack-plugin-serve
+    dev: false
+
+  /react-simple-star-rating/4.0.5_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-995YpXtLNNLim/K59lhRqFnvpRXJHsiJAnYAu2iHEjfCn4u8hP9Eam53hi+ubc6stU25FzvBPyXKzjhu7wl+hA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
     dev: false
 
   /react/18.1.0:

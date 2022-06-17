@@ -7,7 +7,8 @@ function App() {
       <nav style={{ display: "flex", gap: "1rem" }}>
         <Link to="/">Home</Link>
         <Link to="/overview">Overview</Link>
-        <Link to="/multi">Multi</Link>
+        <Link to="/shopping-list">Shopping list</Link>
+        {/* <Link to="/test">test</Link> */}
       </nav>
       <Outlet />
     </div>
