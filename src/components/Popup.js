@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { db } from "../firebase/config";
+import { db } from "../utils/firebase";
 import { useParams, Link } from "react-router-dom";
 import { doc, collection, addDoc, deleteDoc } from "firebase/firestore";
 import Upload from "../utils/fileUpload";
+
+// import "../assets/main.css";
 
 const Popup = (props) => {
   const [form, setForm] = useState({
@@ -80,11 +82,11 @@ const Popup = (props) => {
     <div>
       <div className="popup">
         {/* popupBackground dient om makkelijk weg te klikken */}
-        <div className="popupBackground" onClick={() => props.setTrigger(false)}></div>
-        <div className="innerPopup">
+        <div className="popup__popupBackground" onClick={() => props.setTrigger(false)}></div>
+        <div className="popup__innerPopup">
           <h2>Add a recipe</h2>
           <form>
-            <div className="form-group">
+            <div className="formGroup">
               <label>Name</label>
               <input
                 type="text"
@@ -93,7 +95,7 @@ const Popup = (props) => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>This recipe is...</label>
               <select
                 value={form.mealType}
@@ -107,9 +109,9 @@ const Popup = (props) => {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>Picture</label>
-              <div className="optional">
+              <div className="formGroup__optional">
                 <Upload
                   onSuccess={(url) => {
                     setForm({ ...form, image: url });
@@ -120,9 +122,9 @@ const Popup = (props) => {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>Video</label>
-              <div className="optional">
+              <div className="formGroup__optional">
                 <Upload
                   onSuccess={(url) => {
                     setForm({ ...form, video: url });
@@ -133,7 +135,7 @@ const Popup = (props) => {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>Description</label>
               <textarea
                 type="text"
@@ -142,7 +144,7 @@ const Popup = (props) => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>Ingredients</label>
               {form.ingredients.map((ingredient, i) => (
                 <input
@@ -157,7 +159,7 @@ const Popup = (props) => {
               Add ingredient
             </button>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>Steps</label>
               {form.steps.map((step, i) => (
                 <textarea key={i} type="text" value={step} onChange={(e) => handleStep(e, i)} />
@@ -167,9 +169,9 @@ const Popup = (props) => {
               Add step
             </button>
 
-            <div className="form-group">
+            <div className="formGroup">
               <label>
-                Allergens <span className="optional-label">Optional</span>
+                Allergens <span className="formGroup__optionalLabel">Optional</span>
               </label>
               {form.allergens.map((allergen, i) => (
                 <input

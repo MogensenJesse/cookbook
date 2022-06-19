@@ -3,12 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { Rating } from "react-simple-star-rating";
 
-import { db } from "../firebase/config";
+import { db } from "../utils/firebase";
 import { Popup, ConfirmDialog } from "../components/Popup";
 // import EditPopup from "../components/EditPopup";
 import AddToShoppingList from "../utils/addToShoppingList";
-
-import "../assets/css/recipe.css";
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState([]);
@@ -23,7 +21,7 @@ const Recipe = () => {
   const { recipeid } = useParams();
 
   // Catch Rating value
-  const handleRating = (rate: number) => {
+  const handleRating = (rate) => {
     setRating(rate);
     updateDoc(docRef, {
       score: rate,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase/config";
+import { db } from "../utils/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 const useCollection = (c, filterObject = {}) => {

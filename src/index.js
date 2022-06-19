@@ -5,7 +5,8 @@ import App from "./App";
 import Overview from "./pages/Overview";
 import Recipe from "./pages/Recipe";
 import ShoppingList from "./pages/ShoppingList";
-// import Test from "./pages/Test";
+
+import "./assets/main.css";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -14,11 +15,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          {" "}
           <Route path="/overview" element={<Overview />} />
           <Route path="/overview/:recipeid" element={<Recipe />} />
           <Route path="/shopping-list" element={<ShoppingList />} />
-          {/* <Route path="/test" element={<Test />} /> */}
         </Route>
 
         <Route

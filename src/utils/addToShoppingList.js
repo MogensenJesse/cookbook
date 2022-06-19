@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, addDoc, onSnapshot, collection } from "firebase/firestore";
 
-import { db } from "../firebase/config";
+import { db } from "./firebase";
 
 // lol ok gwn alles dupliceren en enkel nodige stuff in shopping list ophalen
 

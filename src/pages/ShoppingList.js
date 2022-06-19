@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Popup } from "../components/Popup";
 import { doc, collection, onSnapshot, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase/config";
-
-import "../assets/css/reset.css";
-import "../assets/css/overview.css";
+import { db } from "../utils/firebase";
 
 function ShoppingList() {
   const [popupActive, setPopupActive] = useState(false);
@@ -30,7 +27,8 @@ function ShoppingList() {
 
   return (
     <div>
-      <main className="mainContainer">
+      <div className="mainContainer">
+      <main className="main">
         <div>
           <h1>Your shopping list</h1>
 
@@ -62,6 +60,7 @@ function ShoppingList() {
         </div>
       </main>
       <Popup trigger={popupActive} setTrigger={setPopupActive}></Popup>
+    </div>
     </div>
   );
 }

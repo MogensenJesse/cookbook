@@ -35,6 +35,7 @@ dependencies:
   firebase: 9.8.1
   nanoid: 4.0.0
   postcss: 8.4.13
+  postcss-normalize: 10.0.1_3a4j5usjtoc23kersryedrwazm
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-hook-form: 7.31.1_react@18.1.0
@@ -44,9 +45,6 @@ dependencies:
   svgo: 2.8.0
   typescript: 4.6.4
   web-vitals: 2.1.4
-
-devDependencies:
-  postcss-normalize: 10.0.1_3a4j5usjtoc23kersryedrwazm
 
 packages:
 
@@ -1418,6 +1416,7 @@ packages:
 
   /@csstools/normalize.css/12.0.0:
     resolution: {integrity: sha512-M0qqxAcwCsIVfpFQSlGN5XjXWu8l5JDZN+fPt1LeW5SZexQTgnaEvgXAY+CeygRw0EeppWHi12JxESWiWrB0Sg==}
+    dev: false
 
   /@csstools/postcss-color-function/1.1.0_postcss@8.4.13:
     resolution: {integrity: sha512-5D5ND/mZWcQoSfYnSPsXtuiFxhzmhxt6pcjrFLJyldj+p0ZN2vvRpYNX+lahFTtMhAYOa2WmkdGINr0yP0CvGA==}
@@ -7641,6 +7640,7 @@ packages:
     dependencies:
       browserslist: 4.20.3
       postcss: 8.4.13
+    dev: false
 
   /postcss-calc/8.2.4_postcss@8.4.13:
     resolution: {integrity: sha512-SmWMSJmB8MRnnULldx0lQIyhSNvuDl9HfrZkaqqE/WHAhToYsAvDq+yAsA/kIyINDszOp3Rh0GFoNuH5Ypsm3Q==}
@@ -8177,6 +8177,7 @@ packages:
       postcss: 8.4.13
       postcss-browser-comments: 4.0.0_3a4j5usjtoc23kersryedrwazm
       sanitize.css: 13.0.0
+    dev: false
 
   /postcss-opacity-percentage/1.1.2:
     resolution: {integrity: sha512-lyUfF7miG+yewZ8EAk9XUBIlrHyUE6fijnesuz+Mj5zrIHIEw6KcIZSOk/elVMqzLvREmXB83Zi/5QpNRYd47w==}
@@ -9000,6 +9001,7 @@ packages:
 
   /sanitize.css/13.0.0:
     resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
+    dev: false
 
   /sass-loader/12.6.0_webpack@5.72.1:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
