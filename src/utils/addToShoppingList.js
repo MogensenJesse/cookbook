@@ -4,7 +4,7 @@ import { doc, addDoc, onSnapshot, collection } from "firebase/firestore";
 
 import { db } from "./firebase";
 
-// lol ok gwn alles dupliceren en enkel nodige stuff in shopping list ophalen
+// Workaround: duplicate database document in shopping list collection
 
 const AddToShoppingList = () => {
   const [recipe, setRecipe] = useState([]);
@@ -27,7 +27,7 @@ const AddToShoppingList = () => {
     // setRecipe({});
   };
 
-  console.log(recipe);
+  // console.log(recipe);
   // console.log(data);
 
   return (

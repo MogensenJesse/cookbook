@@ -6,14 +6,9 @@ import useCollection from "../hooks/useCollection";
 import { Filter } from "../components/Filter";
 
 function Overview() {
-  const [rating, setRating] = useState(0);
-
+  
   const [filters, setFilters] = useState({});
   const recipes = useCollection("recipes", filters);
-
-  const handleRating = (rate) => {
-    setRating(rate);
-  };
 
   return (
     <div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Popup } from "../components/Popup";
 import { doc, collection, onSnapshot, deleteDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 

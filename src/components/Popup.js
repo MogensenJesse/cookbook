@@ -4,8 +4,6 @@ import { useParams, Link } from "react-router-dom";
 import { doc, collection, addDoc, deleteDoc } from "firebase/firestore";
 import Upload from "../utils/fileUpload";
 
-// import "../assets/main.css";
-
 const Popup = (props) => {
   const [form, setForm] = useState({
     name: "",
@@ -20,12 +18,11 @@ const Popup = (props) => {
   });
 
   const recipesCollectionRef = collection(db, "recipes");
-  // const ingredientCollectionRef = doc(db, "recipes", "ingredients");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(form);
+    // console.log(form);
 
     if (!form.name || !form.desc || !form.ingredients || !form.steps) {
       alert("Please fill in all fields");
@@ -136,7 +133,7 @@ const Popup = (props) => {
                   id="picture"
                   onSuccess={(url) => {
                     setForm({ ...form, image: url });
-                    console.log(url);
+                    // console.log(url);
                   }}
                   acceptedFileTypes=".jpeg,.jpg,.png"
                 />
@@ -222,7 +219,7 @@ const Popup = (props) => {
                   id="video"
                   onSuccess={(url) => {
                     setForm({ ...form, video: url });
-                    console.log(url);
+                    // console.log(url);
                   }}
                   acceptedFileTypes="video/*"
                 />

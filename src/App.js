@@ -6,11 +6,8 @@ function App() {
   return (
     <div>
       <Sidebar />
-      {/* <Overview /> */}
     </div>
   );
 }
 
 export default App;
-
-// recepten & ingredienten toevoegen: https://codesandbox.io/s/twilight-shadow-tlojhn

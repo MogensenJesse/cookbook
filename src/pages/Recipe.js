@@ -9,10 +9,7 @@ import AddToShoppingList from "../utils/addToShoppingList";
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState([]);
-  const [popupActive, setPopupActive] = useState(false);
-  // const [editPopupActive, setEditPopupActive] = useState(false);
   const [confirmDialogActive, setConfirmDialogActive] = useState(false);
-  // const [videoBox, setVideoBox] = useState(false);
   const [docRef, setDocRef] = useState(false);
 
   const [rating, setRating] = useState(0); // initial rating value
