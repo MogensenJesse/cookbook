@@ -1,0 +1,98 @@
+$onyx: #1c1b1a;
+$warmDark: #292726;
+$leather: #c2a793;
+$sand: #e9e5e2;
+
+body {
+  background-color: $onyx;
+  color: $sand;
+  font-family: "Satoshi";
+}
+
+main {
+  width: 65%;
+  margin: 0 auto;
+  max-width: 1500px;
+}
+
+.mainContainer {
+  margin-left: 20vw;
+
+  @media (min-width: 2500px) {
+    margin-left: 500px;
+  }
+}
+
+h1 {
+  font-family: "Wayfinder CF";
+  font-size: 6.5em;
+}
+
+h2 {
+    font-family: "Wayfinder CF";
+    font-size: 3em;
+    margin-top: 3rem;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+.h1-italic {
+  font-style: italic;
+  color: $leather;
+}
+
+li {
+    margin-top: 1em;
+    font-size: 1.2em;
+}
+
+.button {
+  color: $leather;
+  text-decoration: none;
+  font-size: 21px;
+  border-radius: 3px;
+  padding: 0.8em 1em 0.9em 1em;
+  background-color: rgba($color: $onyx, $alpha: 0.1);
+  border: $leather solid 1px;
+  letter-spacing: 0.35px;
+  backdrop-filter: blur(10px);
+  transition: ease-in 0.2s;
+  font-family: "Satoshi";
+
+  &:hover {
+    background-color: rgba($color: $onyx, $alpha: 0.7);
+    cursor: pointer;
+    transition: ease-out 0.2s;
+  }
+}
+
+.buttonSecondary {
+  padding: 0.7em 1em 0.8em;
+  background-color: rgba($color: $sand, $alpha: 0.1);
+  border: none;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: $sand;
+  text-decoration: none;
+  transition: ease-in 0.2s;
+  font-family: "Satoshi";
+
+  &:hover {
+    background-color: rgba($color: $sand, $alpha: 0.2);
+    cursor: pointer;
+    transition: ease-out 0.2s;
+  }
+}
+
+.mealType {
+  position: absolute;
+  padding: 0.7em 1em 0.8em;
+  background-color: rgba($color: $onyx, $alpha: 0.1);
+  border-radius: 3px;
+  letter-spacing: 1px;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+}

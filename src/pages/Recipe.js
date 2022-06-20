@@ -4,8 +4,7 @@ import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { Rating } from "react-simple-star-rating";
 
 import { db } from "../utils/firebase";
-import { Popup, ConfirmDialog } from "../components/Popup";
-// import EditPopup from "../components/EditPopup";
+import { ConfirmDialog } from "../components/Popup";
 import AddToShoppingList from "../utils/addToShoppingList";
 
 const Recipe = () => {
@@ -45,54 +44,100 @@ const Recipe = () => {
       return;
       // console.log("no video");
     }
-    return <video className="recipe-image" controls src={array.video}></video>;
+    return <video className="recipe__video" controls src={array.video}></video>;
   };
 
   return (
     <div>
-      <button onClick={() => setPopupActive(true)}>Add recipe</button>
-      {/* <button onClick={() => setEditPopupActive(true)}>Edit recipe</button> */}
-      <Link to="/overview">Back to overview</Link>
-      <div>
-        <img className="recipe-image" src={recipe.image} alt={recipe.name}></img>
-        <AddToShoppingList></AddToShoppingList>
-        <Rating
-          ratingValue={recipe.score}
-          fillColorArray={["#f17a45", "#f19745", "#f1a545", "#f1b345", "#f1d045"]}
-          readonly={true}
-        />
+      <div className="mainContainer">
+        <header className="recipeImage">
+          <div className="recipeImage__container">
+            <img className="recipeImage__image" src={recipe.image} alt={recipe.name}></img>
+            <img
+              className="recipeImage__image recipeImage__image--shadow"
+              src={recipe.image}
+              alt={recipe.name}
+            ></img>
+          </div>
+          <AddToShoppingList></AddToShoppingList>
+          <span className="mealType recipeImage__mealType">{recipe.mealType}</span>
+        </header>
 
-        <h1>{recipe.name}</h1>
+        <main className="recipe">
+          <Link className="buttonSecondary recipe__back" to="/overview">
+            All recipes
+          </Link>
+          <Rating
+            className="recipe__rating"
+            ratingValue={recipe.score}
+            fillColorArray={["#f17a45", "#f19745", "#f1a545", "#f1b345", "#f1d045"]}
+            readonly={true}
+            size={20}
+            emptyColor={"#292726"}
+          />
+          <button
+            className="buttonSecondary recipe__remove"
+            onClick={() => setConfirmDialogActive(true)}
+          >
+            Remove recipe
+          </button>
 
-        {/* dangerouslySetInnerHTML neemt de break tags vanuit de database over */}
-        <p dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
-        <h4>Ingredients</h4>
-        <ul>
-          {recipe.ingredients?.map((ingredient, i) => {
-            return <li key={i}>{ingredient}</li>;
-          })}
-        </ul>
+          <h1 className="recipe__name">{recipe.name}</h1>
 
-        <h4>Steps</h4>
-        <ol>
-          {recipe.steps?.map((step, i) => {
-            return <li key={i}>{step}</li>;
-          })}
-        </ol>
-        {ExistenceCheck(recipe)}
-        <button onClick={() => setConfirmDialogActive(true)}>remove recipe</button>
+          {/* dangerouslySetInnerHTML neemt de break tags vanuit de database over */}
+          <p className="recipe__description" dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
+          <h2>Ingredients</h2>
+          <ul>
+            {recipe.ingredients?.map((ingredient, i) => {
+              return (
+                <li className="recipe__ingredients" key={i}>
+                  {ingredient}
+                </li>
+              );
+            })}
+          </ul>
+
+          <h2>Steps</h2>
+          <ol>
+            {recipe.steps?.map((step, i) => {
+              return (
+                <li className="recipe__steps" key={i}>
+                  {step}
+                </li>
+              );
+            })}
+          </ol>
+
+          <h2>Allergens</h2>
+          <ul>
+            {recipe.allergens?.map((allergen, i) => {
+              return (
+                <li className="recipe__ingredients" key={i}>
+                  {allergen}
+                </li>
+              );
+            })}
+          </ul>
+          {ExistenceCheck(recipe)}
+          <section className="recipe__giveRating">
+            <h2 className="recipe__giveRating__title">How would you rate this creation?</h2>
+            {/* <div className="recipe__giveRating__container"> */}
+            <Rating
+              transition
+              onClick={handleRating}
+              ratingValue={recipe.score}
+              showTooltip
+              tooltipArray={["Terrible", "Had better", "It's okay", "Nice!", "Fingerlickin' good!"]}
+              fillColorArray={["#f17a45", "#f19745", "#f1a545", "#f1b345", "#f1d045"]}
+              tooltipDefaultText="Rate this recipe"
+              emptyColor={"#1c1b1a"}
+              tooltipStyle={{ position: "absolute", marginTop: "4px", letterSpacing: "1px" }}
+            />
+            {/* </div> */}
+          </section>
+        </main>
       </div>
-      <Popup trigger={popupActive} setTrigger={setPopupActive}></Popup>
-      {/* <EditPopup trigger={editPopupActive} setTrigger={setEditPopupActive}></EditPopup> */}
-      <Rating
-        transition
-        onClick={handleRating}
-        ratingValue={recipe.score}
-        showTooltip
-        tooltipArray={["Terrible", "Had better", "It's okay", "Nice!", "Fingerlickin' good!"]}
-        fillColorArray={["#f17a45", "#f19745", "#f1a545", "#f1b345", "#f1d045"]}
-        tooltipDefaultText="Rate this recipe"
-      />
+
       <ConfirmDialog
         trigger={confirmDialogActive}
         setTrigger={setConfirmDialogActive}

@@ -1,0 +1,13 @@
+// global styles
+@import "global/reset";
+@import "global/typography";
+@import "global/global";
+
+// components
+@import "components/sidebar";
+@import "components/popup";
+
+// pages
+@import "pages/overview";
+@import "pages/recipe";
+@import "pages/shoppinglist"

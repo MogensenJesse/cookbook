@@ -31,11 +31,11 @@ const AddToShoppingList = () => {
   // console.log(data);
 
   return (
-    <div>
-      <button type="submit" onClick={handleSubmit}>
+    <>
+      <button className="button recipeImage__shoppingList" type="submit" onClick={handleSubmit}>
         Add ingredients to shopping list
       </button>
-    </div>
+    </>
   );
 };
 

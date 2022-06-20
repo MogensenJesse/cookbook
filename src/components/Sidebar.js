@@ -19,7 +19,7 @@ const Sidebar = () => {
             Shopping list
           </Link>
         </div>
-        <button className="sidebar__addButton" onClick={() => setPopupActive(true)}>
+        <button className="button" onClick={() => setPopupActive(true)}>
           Add recipe
         </button>
       </nav>

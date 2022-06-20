@@ -1,0 +1,33 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    min-width: 300px;
+    max-width: 500px;
+    height: 100vh;
+    background-color: $warmDark;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    &__logo {
+      margin-bottom: 4em;
+    }
+  
+    &__navItem {
+      display: block;
+      color: $sand;
+      text-decoration: none;
+      font-size: 21px;
+      border-radius: 3px;
+      padding: 0.8em 1em 0.9em 1em;
+      margin: 0 -1em 0.5em -1em;
+      letter-spacing: 0.35px;
+  
+      &:hover {
+        background-color: $onyx;
+      }
+    }
+  }

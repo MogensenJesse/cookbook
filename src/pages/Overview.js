@@ -31,7 +31,7 @@ function Overview() {
                 <Link to={`/overview/${recipe.id}`} className="recipeCard__link">
                   <div className="recipeCard__container">
                     <img className="recipeCard__image" src={recipe.image} alt={recipe.name}></img>
-                    <span className="recipeCard__container__mealType">{recipe.mealType}</span>
+                    <span className="mealType recipeCard__container__mealType">{recipe.mealType}</span>
                   </div>
                   <div className="recipeCard__content">
                     <span className="recipeCard__name">{recipe.name}</span>
@@ -39,6 +39,8 @@ function Overview() {
                       ratingValue={recipe.score}
                       fillColorArray={["#f17a45", "#f19745", "#f1a545", "#f1b345", "#f1d045"]}
                       readonly={true}
+                      size={20}
+                      emptyColor={"#1c1b1a"}
                     />
                   </div>
                 </Link>

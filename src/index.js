@@ -6,7 +6,7 @@ import Overview from "./pages/Overview";
 import Recipe from "./pages/Recipe";
 import ShoppingList from "./pages/ShoppingList";
 
-import "./assets/main.css";
+import "./assets/css/main.scss";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);

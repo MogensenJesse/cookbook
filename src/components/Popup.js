@@ -79,40 +79,61 @@ const Popup = (props) => {
   };
 
   return props.trigger ? (
-    <div>
-      <div className="popup">
+    <>
+      <div className="popupContainer">
         {/* popupBackground dient om makkelijk weg te klikken */}
-        <div className="popup__popupBackground" onClick={() => props.setTrigger(false)}></div>
-        <div className="popup__innerPopup">
-          <h2>Add a recipe</h2>
-          <form>
-            <div className="formGroup">
-              <label>Name</label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
+        <div
+          className="popupContainer__background"
+          onClick={() =>
+            props.setTrigger(false) &
+            setForm({
+              name: "",
+              mealType: "",
+              desc: "",
+              ingredients: [],
+              steps: [],
+              allergens: [],
+              score: "",
+              image: "",
+              video: "",
+            })
+          }
+        ></div>
+        <div className="popup">
+          <h2 className="popup__title">Add a recipe</h2>
+          <form className="form">
+            <div className="form__group">
+              <label className="form__label">
+                Name
+                <input
+                  className="form__input"
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </label>
+              <label className="form__label">
+                This recipe is...
+                <select
+                  className="form__input form__input--select"
+                  value={form.mealType}
+                  onChange={(e) => setForm({ ...form, mealType: e.target.value })}
+                >
+                  <option value="">Choose wisely...</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Snack">Snack</option>
+                  <option value="Dinner">Dinner</option>
+                </select>
+              </label>
             </div>
-
-            <div className="formGroup">
-              <label>This recipe is...</label>
-              <select
-                value={form.mealType}
-                onChange={(e) => setForm({ ...form, mealType: e.target.value })}
-              >
-                <option value="">Choose wisely...</option>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Snack">Snack</option>
-                <option value="Dinner">Dinner</option>
-              </select>
-            </div>
-
-            <div className="formGroup">
-              <label>Picture</label>
-              <div className="formGroup__optional">
+            <label for="picture" className="form__label">
+              Picture
+            </label>
+            <div className="form__section">
+              <div className="form__label form__label--file">
                 <Upload
+                  id="picture"
                   onSuccess={(url) => {
                     setForm({ ...form, image: url });
                     console.log(url);
@@ -122,10 +143,83 @@ const Popup = (props) => {
               </div>
             </div>
 
-            <div className="formGroup">
-              <label>Video</label>
-              <div className="formGroup__optional">
+            <label className="form__label">
+              Description
+              <textarea
+                className="form__input form__input--textarea"
+                type="text"
+                value={form.desc}
+                onChange={(e) => setForm({ ...form, desc: e.target.value })}
+              />
+            </label>
+            <label className="form__label">
+              Ingredients
+              {form.ingredients.map((ingredient, i) => (
+                <input
+                  className="form__input"
+                  autoFocus
+                  key={i}
+                  type="text"
+                  value={ingredient}
+                  onChange={(e) => handleIngredient(e, i)}
+                />
+              ))}
+              <button
+                className="buttonSecondary form__button"
+                type="button"
+                onClick={handleIngredientCount}
+              >
+                Add ingredient
+              </button>
+            </label>
+            <label className="form__label">
+              Steps
+              {form.steps.map((step, i) => (
+                <textarea
+                  className="form__input"
+                  autoFocus
+                  key={i}
+                  type="text"
+                  value={step}
+                  onChange={(e) => handleStep(e, i)}
+                />
+              ))}
+              <button
+                className="buttonSecondary form__button"
+                type="button"
+                onClick={handleStepCount}
+              >
+                Add step
+              </button>
+            </label>
+            <label className="form__label">
+              Allergens <span className="form__optional">Optional</span>
+              {form.allergens.map((allergen, i) => (
+                <input
+                  className="form__input"
+                  autoFocus
+                  key={i}
+                  type="text"
+                  value={allergen}
+                  onChange={(e) => handleAllergen(e, i)}
+                />
+              ))}
+              <button
+                type="button"
+                className="buttonSecondary form__button"
+                onClick={handleAllergenCount}
+              >
+                Add Allergen
+              </button>
+            </label>
+
+            <label for="video" className="form__label">
+              Instructional video
+            </label>
+            <div className="form__section">
+              <div className="form__label form__label--file">
                 <Upload
+                  id="video"
                   onSuccess={(url) => {
                     setForm({ ...form, video: url });
                     console.log(url);
@@ -135,72 +229,40 @@ const Popup = (props) => {
               </div>
             </div>
 
-            <div className="formGroup">
-              <label>Description</label>
-              <textarea
-                type="text"
-                value={form.desc}
-                onChange={(e) => setForm({ ...form, desc: e.target.value })}
-              />
-            </div>
-
-            <div className="formGroup">
-              <label>Ingredients</label>
-              {form.ingredients.map((ingredient, i) => (
-                <input
-                  key={i}
-                  type="text"
-                  value={ingredient}
-                  onChange={(e) => handleIngredient(e, i)}
-                />
-              ))}
-            </div>
-            <button type="button" onClick={handleIngredientCount}>
-              Add ingredient
-            </button>
-
-            <div className="formGroup">
-              <label>Steps</label>
-              {form.steps.map((step, i) => (
-                <textarea key={i} type="text" value={step} onChange={(e) => handleStep(e, i)} />
-              ))}
-            </div>
-            <button type="button" onClick={handleStepCount}>
-              Add step
-            </button>
-
-            <div className="formGroup">
-              <label>
-                Allergens <span className="formGroup__optionalLabel">Optional</span>
-              </label>
-              {form.allergens.map((allergen, i) => (
-                <input
-                  key={i}
-                  type="text"
-                  value={allergen}
-                  onChange={(e) => handleAllergen(e, i)}
-                />
-              ))}
-            </div>
-            <button type="button" onClick={handleAllergenCount}>
-              Add Allergen
-            </button>
-
-            <div className="submitButtons">
-              <button type="submit" onClick={handleSubmit}>
-                Add recipe
-              </button>
-              <button type="button" onClick={() => props.setTrigger(false)}>
-                Close
+            <div className="form__label">
+              <button
+                className="button form__button form__button--submit"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Add recipe!
               </button>
             </div>
           </form>
+          <button
+            className="popup__close"
+            type="button"
+            onClick={() =>
+              props.setTrigger(false) &
+              setForm({
+                name: "",
+                mealType: "",
+                desc: "",
+                ingredients: [],
+                steps: [],
+                allergens: [],
+                score: "",
+                image: "",
+                video: "",
+              })
+            }
+          ></button>
 
           {/* Test om te zien of de inputs werken */}
           {/* {JSON.stringify(form)} */}
         </div>
       </div>
-    </div>
+    </>
   ) : (
     ""
   );
@@ -214,18 +276,29 @@ const ConfirmDialog = (props) => {
     deleteDoc(doc(db, "recipes", recipeid));
   };
   return props.trigger ? (
-    <div>
-      <div className="popup">
+    <>
+      <div className="popupContainer">
         {/* popupBackground dient om makkelijk weg te klikken */}
-        <div className="popupBackground" onClick={() => props.setTrigger(false)}></div>
-        <div className="innerPopup">
-          <h2>Are you sure?</h2>
-          <button onClick={() => removeRecipe(recipe.id)}>
-            <Link to="/overview">Yes, remove this recipe</Link>
-          </button>
+        <div className="popupContainer__background" onClick={() => props.setTrigger(false)}></div>
+        <div className="popup">
+          <h2 className="popup__title">Are you sure?</h2>
+          <div className="form__label">
+            <Link
+              className="button form__button form__button--submit"
+              onClick={() => removeRecipe(recipe.id)}
+              to="/overview"
+            >
+              Yes, remove this recipe
+            </Link>
+          </div>
+          <button
+            className="popup__close"
+            type="button"
+            onClick={() => props.setTrigger(false)}
+          ></button>
         </div>
       </div>
-    </div>
+    </>
   ) : (
     ""
   );

@@ -50,8 +50,12 @@ const Upload = ({ onSuccess, acceptedFileTypes }) => {
   return (
     <>
       <input type="file" onChange={handleChange} accept={acceptedFileTypes} />
-      <span className="optional-label">{percent}% done</span>
-      <button onClick={handleUpload}>Upload to Firebase</button>
+      <div>
+        <span className="form__percent">{percent}% done</span>
+        <button className="buttonSecondary form__button" onClick={handleUpload}>
+          Upload file
+        </button>
+      </div>
     </>
   );
 };

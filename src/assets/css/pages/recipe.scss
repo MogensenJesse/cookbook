@@ -1,0 +1,118 @@
+.recipeImage {
+  max-width: 2500px;
+  margin: 0 auto;
+  padding: 2em;
+  position: relative;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    border-radius: 10px;
+    z-index: 1;
+
+    &--shadow {
+      filter: blur(60px);
+      mix-blend-mode: soft-light;
+      z-index: -1;
+      width: 85%;
+      height: 80%;
+      position: absolute;
+      top: 160px;
+    }
+  }
+
+  &__shoppingList {
+    font-size: 14px;
+    position: absolute;
+    bottom: 4em;
+    right: 4em;
+    padding: 1.25em 1.8em 1.4em;
+    background-color: rgba($color: $onyx, $alpha: 0.5);
+    letter-spacing: 1px;
+    z-index: 2;
+  }
+
+  &__mealType {
+    position: absolute;
+    bottom: 4em;
+    left: 4em;
+    z-index: 2;
+  }
+}
+
+.recipe {
+  position: relative;
+  margin-top: 20px;
+  line-height: 1.5;
+  margin-bottom: 100px;
+
+  &__name {
+    line-height: 0.9;
+    margin-top: 3rem;
+  }
+
+  &__back {
+    position: absolute;
+    left: -120px;
+    // line-height: 1.5;
+  }
+
+  &__rating {
+    margin-top: 0.65em;
+  }
+
+  &__remove {
+    position: absolute;
+    right: 0;
+  }
+
+  &__description {
+    max-width: 900px;
+    margin-top: 3rem;
+  }
+
+  &__ingredients {
+    max-width: 700px;
+  }
+
+  &__steps {
+    margin-left: 40px;
+    max-width: 700px;
+    margin-bottom: 1.5em;
+
+    &::before {
+      content: counter(list-item);
+      color: $leather;
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  &__video {
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 3rem;
+  }
+
+  &__giveRating {
+    background-color: $warmDark;
+    padding: 4rem 0 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    margin-top: 3rem;
+
+    &__title {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+  }
+}
