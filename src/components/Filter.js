@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-// import { Form, Container } from "react-bootstrap";
+import React from "react";
 
 export const Filter = ({ setFilters, selectedFilters }) => {
   const onChange = (e) => {
-    /**
-     * {
-     * mealType:["Mediterraans"]
-     * }
-     */
     const selectedName = e.target.name;
     if (e.target.checked) {
       // if checkboxes are being checked
@@ -35,8 +29,6 @@ export const Filter = ({ setFilters, selectedFilters }) => {
       setFilters(newFilters);
     }
   };
-
-  // console.log(selectedFilters);
 
   return (
     <div className="filter">
