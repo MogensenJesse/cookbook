@@ -23,7 +23,7 @@ function Overview() {
             Browse through <i className="h1-italic">your brilliant</i> dishes
           </h1>
 
-          {/* <Filter setFilters={setFilters} selectedFilters={filters} /> */}
+          <Filter setFilters={setFilters} selectedFilters={filters} />
 
           <div className="recipes">
             {recipes.map((recipe, i) => (
